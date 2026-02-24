@@ -12,6 +12,8 @@ import PyRaTe
 #Training:---------------------------------------------------------------------
 
 #GeoTIFF image bands importation:
+#(An example set of 9 bands GeoTIFF files is available in the example/dataset
+#directory).
 
 band_list,band_bounds = PyRaTe.importation()
 

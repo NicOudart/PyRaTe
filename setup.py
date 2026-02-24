@@ -2,7 +2,7 @@ from setuptools import setup,find_packages
 
 setup(name='PyRaTe',
 version='2026.2',
-description='PyRaTe: Python tools for teledection raster classification',
+description='PyRaTe: Python tools for remote-sensing raster classification',
 long_description=open("requirements.txt").read(),
 long_description_content_type='text/markdown',
 url='#',
