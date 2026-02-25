@@ -2,7 +2,7 @@
 
 # PyRaTe: Python tools for remote-sensing raster classification
 
-_Python library made for UVSQ students in remote-sensing_
+_Python library made for Versailles Saint-Quentin-en-Yvelines university (UVSQ) students in remote-sensing_
 
 ---
 

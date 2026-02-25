@@ -1,0 +1,13 @@
+site_name: "UVSQ_PyRaTe"
+site_url: "https://nicoudart.github.io/UVSQ_PyRaTe_tutorial"
+site_author: "Nicolas OUDART"
+
+theme:
+  name: readthedocs
+nav:
+  - Introduction: index.md
+  - Importation: importation.md
+  - Classification: classification.md
+  - Entrainement: entrainement.md
+  - Test: test.md
+  - Prediction: prediction.md
