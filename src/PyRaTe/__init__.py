@@ -1,3 +1,4 @@
+from .function_dataset_statistics import dataset_statistics
 from .function_img_display import img_display
 from .function_importation import importation
 from .function_label_display import label_display

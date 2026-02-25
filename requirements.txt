@@ -4,3 +4,4 @@ matplotlib
 rasterio
 scikit-learn
 PyQt5
+seaborn
