@@ -9,7 +9,7 @@
 
 import PyRaTe
 
-#Training:---------------------------------------------------------------------
+#Dataset preparation:----------------------------------------------------------
 
 #GeoTIFF image bands importation:
 #(An example set of 9 bands GeoTIFF files is available in the example/dataset
@@ -24,6 +24,12 @@ PyRaTe.img_display(band_list,band_bounds,display_rgb=[3,2,1])
 #Label a training dataset:
 
 df_training = PyRaTe.labelling(band_list,display_rgb=[3,2,1])
+
+#Statistics:-------------------------------------------------------------------
+
+PyRaTe.dataset_statistics(df_training)
+
+#Training:---------------------------------------------------------------------
 
 #Train a classifier on this training dataset:
 
