@@ -7,7 +7,6 @@ theme:
 nav:
   - Introduction: index.md
   - Importation: importation.md
-  - Classification: classification.md
   - Entrainement: entrainement.md
   - Test: test.md
   - Prediction: prediction.md
