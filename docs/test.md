@@ -1,5 +1,9 @@
 # Test d'un classifieur
 
+## Problème du sur-apprentissage
+
+## Générer une base de données de test
+
 ![Labélisation de la forêt](img/Labelling_test_forest.png)
 
 ![Labélisation des champs](img/Labelling_test_field.png)
@@ -7,6 +11,8 @@
 ![Labélisation des plans d'eau](img/Labelling_test_water.png)
 
 ![Labélisation des zones urbaines](img/Labelling_test_city.png)
+
+# Performances en généralisation
 
 ![Exactitude en test](img/Test_accuracy.png)
 
