@@ -1,5 +1,11 @@
 # Test d'un classifieur
 
+Nous avons un classifieur prêt à être utilisé.
+Mais avant de l'appliquer à nos données d'étude, nous aimerions être sûrs qu'il performera bien sur des données qu'il n'a jamais vues.
+Nous allons donc le tester avec **PyRaTe**.
+
+---
+
 ## Problème du sur-apprentissage
 
 ## Générer une base de données de test
