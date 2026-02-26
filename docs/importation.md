@@ -103,9 +103,9 @@ PyRaTe.img_display(band_list,band_bounds,display_rgb=[7,3,2])
 
 Voici la figure qui s'affiche :
 
-![Affichage de l'image RGB en fausses couleurs](img/Img_display_true_colors.png)
+![Affichage de l'image RGB en fausses couleurs](img/Img_display_false_colors.png)
 
 Ce type d'affichage en "fausses couleurs" est particulièrement utile pour l'étude de la végétation : la chloropylle réfléchit fortement le proche infrarouge, ce qui permet de la faire ressortir en rouge dans l'image.
-Les contrastes entre zones urbaines et naturelles sont également renforcés.
+Les contrastes entre zones urbaines, plans d'eaux et végétation sont également renforcés.
 
 Suivant l'application, on peut imaginer réaliser des affichages en "fausses couleurs" avec d'autres bandes d'intérêt.
