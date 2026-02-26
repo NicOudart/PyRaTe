@@ -10,7 +10,7 @@ _Logiciel conçu pour les projets de télédétection des étudiants de l'Univer
 
 **PyRaTe** est une bibliothèque Python conçue pour vous aider lors de vos projets de "télédétection".
 
-Il s'agit un package de fonctions vous permettant d'entrainer un classifieur à identifier les pixels dans une image satellite multi-bande.
+Il s'agit un package de fonctions vous permettant d'entrainer un classifieur à identifier les pixels dans une image satellite "raster" multi-bande : un problème classique en télédétection.
 
 Elle contient des fonctions pour :
 
@@ -28,7 +28,7 @@ Elle contient des fonctions pour :
 
 * Afficher les **labels prédits** pour les pixels d'une image, avec géoréférencement.
 
-Vous trouverez sur ce site web un **tutoriel** pour prendre en main **PyRaTe**, sur un exemple d'image satellite multi-bande.
+Vous trouverez sur ce site web un **tutoriel** pour prendre en main **PyRaTe**, sur un exemple d'image satellite "raster" multi-bande.
 
 ## Installation
 
