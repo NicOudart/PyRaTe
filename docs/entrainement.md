@@ -83,7 +83,7 @@ Quand vous avez terminé, cliquez sur "Finish".
 
 Un message s'affiche dans la console Python :
 
-![Base de données d'entrainement](img/Labelling_test_dataset.png)
+![Base de données d'entrainement](img/Labelling_training_dataset.png)
 
 Il contient le nombre de pixels sélectionnés pour chaque label.
 
