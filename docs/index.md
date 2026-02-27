@@ -1,6 +1,6 @@
 # Tutoriel PyRaTe
 
-![Logo](img/Logo.png)
+![En-tête logo](img/Logo.png)
 
 _Logiciel conçu pour les projets de télédétection des étudiants de l'Université de Versailles Saint-Quentin (UVSQ)_
 

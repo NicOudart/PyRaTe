@@ -1,5 +1,7 @@
 # Test d'un classifieur
 
+![En-tête test](img/Header_3.png)
+
 Nous avons un classifieur prêt à être utilisé.
 Mais avant de l'appliquer à nos données d'étude, nous aimerions être sûrs qu'il performera bien sur des données qu'il n'a jamais vues.
 Nous allons donc le tester avec **PyRaTe**.
@@ -108,6 +110,10 @@ Apparait alors le message suivant dans la console Python, avec le score d'exacti
 ![Exactitude en test](img/Test_accuracy.png)
 
 _Détectez-vous ici un problème de sur-apprentissage ?_
+
+|Nota Bene|
+|:-|
+|N'oubliez pas que le score de d'exactitude est inadapté quand on a un fort déséquilibre dans les labels de notre base de données.|
 
 La fenêtre suivante apparait aussi :
 

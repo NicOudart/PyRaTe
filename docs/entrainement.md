@@ -1,5 +1,7 @@
 # Entrainement d'un classifieur
 
+![En-tête entrainement](img/Header_2.png)
+
 Maintenant que nous avons importé notre image "raster", nous allons utiliser **PyRaTe** pour entrainer un **classifieur** à prédire les labels associés aux pixels de l'image. 
 
 ---
@@ -73,7 +75,7 @@ Pour chaque label à ajouter à la base de données d'entrainement :
 
 * Sélectionnez avec le clic gauche de la souris des rectangles sur l'image correspondant à ce label.
 
-Voici par exemple avec notre image Sentinel-2 :
+Voici par exemple avec notre image Sentinel-2, la sélection des labels "forest", "field", "water" et "city" :
 
 ![Labélisation de la base d'entrainement](img/Labelling_training.gif)
 
