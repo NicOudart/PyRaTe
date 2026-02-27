@@ -79,9 +79,9 @@ Nous utilisons à nouveau **PyRaTe** avec la commande suivante :
 df_test = PyRaTe.labelling(band_list,display_rgb=[3,2,1])
 ~~~
 
-La fenêtre de labélisation s'ouvre, et nous pouvons sélectionner pixels à ajouter à notre base de données de test :
+La fenêtre de labélisation s'ouvre, et nous pouvons sélectionner des pixels à ajouter à notre base de données de test pour les mêmes labels ("forest", "field", "water", "city") :
 
-![Labélisation de la base de test](img/Labelling.png)
+![Labélisation de la base de test](img/Labelling_test.gif)
 
 Après avoir cliqué sur "Finish", nous obtenons le message suivant dans la console Python :
 
