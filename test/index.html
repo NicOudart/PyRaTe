@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Nicolas OUDART" /><link rel="canonical" href="https://nicoudart.github.io/PyRaTe/test/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Test - UVSQ_PyRaTe</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Test";
+        var mkdocs_page_input_path = "test.md";
+        var mkdocs_page_url = "/PyRaTe/test/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> UVSQ_PyRaTe
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../importation/">Importation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../entrainement/">Entrainement</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Test</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#probleme-du-sur-apprentissage">Problème du sur-apprentissage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generer-une-base-de-donnees-de-test">Générer une base de données de test</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../prediction/">Prediction</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">UVSQ_PyRaTe</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Test</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="test-dun-classifieur">Test d'un classifieur</h1>
+<p><img alt="En-tête test" src="../img/Header_3.png" /></p>
+<p>Nous avons un classifieur prêt à être utilisé.
+Mais avant de l'appliquer à nos données d'étude, nous aimerions être sûrs qu'il performera bien sur des données qu'il n'a jamais vues.
+Nous allons donc le tester avec <strong>PyRaTe</strong>.</p>
+<hr />
+<h2 id="probleme-du-sur-apprentissage">Problème du sur-apprentissage</h2>
+<p>En apprentissage automatique, le nerf de la guerre est la <strong>généralisation</strong>.</p>
+<p>En effet, un modèle qui a d'excellente performances sur les données d'entrainement, mais de mauvaises performances sur n'importe quelles autres données <strong>ne sert à rien</strong>.
+On veut que le modèle soit capable de <strong>généraliser</strong> ce qu'il a apprit.</p>
+<p>Ceci peut arriver lorsqu'un modèle apprend <strong>trop spécifiquement</strong> des données d'entrainement.
+C'est ce que l'on appelle le <strong>sur-apprentissage</strong>, et c'est la hantise de tous les "data-scientists".</p>
+<p>Voici une illustration sur un problème de régression :</p>
+<p><img alt="Le surapprentissage" src="../img/Overfitting.png" /></p>
+<p>Le modèle de gauche est visiblement trop simpliste pour capturer la tendance principale des données : on parle de <strong>sous-apprentissage</strong>.</p>
+<p>Le modèle de droite est visiblement trop complexe, et capture même le bruit dans les données d'entrainement.
+Il aura donc d'excellentes performances sur les données d'entrainement, mais aura du mal à généraliser : il y a <strong>sur-apprentissage</strong>.</p>
+<p>Le modèle <strong>idéal</strong> est au milieu : assez complexe pour capturer la tendance principale des données d'entrainement, sans aller jusqu'à apprendre le bruit dans les données.</p>
+<p>Le <strong>sur-apprentissage</strong> peut avoir différentes origines :</p>
+<ul>
+<li>
+<p>Trop peu de données d'entrainement.</p>
+</li>
+<li>
+<p>Des données d'entrainement pas assez représentatives.</p>
+</li>
+<li>
+<p>Des données de mauvaise qualité (mauvais labels, déséquilibre entre labels, etc.).</p>
+</li>
+<li>
+<p>Un type de modèle trop complexe.</p>
+</li>
+<li>
+<p>Trop peu de d'entrées au modèle.</p>
+</li>
+</ul>
+<p>Dans le contexte de vos projet, en cas de de sur-apprentissage, vous pouvez essayer :</p>
+<ul>
+<li>
+<p>D'ajouter des pixels à vos données d'entrainement.</p>
+</li>
+<li>
+<p>De re-faire votre base de données d'entrainement avec des zones plus représentatives.</p>
+</li>
+<li>
+<p>Ajouter des bandes pertinentes à vos données d'entrainement.</p>
+</li>
+</ul>
+<p>Pour plus d'informations sur le sur-apprentissage, cliquez sur ce lien : <a href="https://nicoudart.github.io/UVSQ_LSSI633_data_science/Chap1_Introduction/#difficultes-de-lapprentissage">Cours sur le sur-apprentissage</a>.</p>
+<p>Mais reste alors une question : <strong>comment détecter un sur-apprentissage ?</strong></p>
+<h2 id="generer-une-base-de-donnees-de-test">Générer une base de données de test</h2>
+<p>Le <strong>sur-apprentissage</strong> est par définition la sous-performance d'un modèle en généralisation.</p>
+<p>La méthode classique que nous appliquerons pour détecter ce phénomène sera donc tout simplement de <strong>tester</strong> notre classifieur sur une base de données de pixels <strong>autres que ceux de l'entrainement</strong>.</p>
+<p><strong>Si le classifieur performe significativement moins bien en test qu'à l'entrainement, c'est qu'il y a probablement sur-apprentissage</strong>.</p>
+<p>Il nous faut donc constituer une base de données de <strong>test</strong>.</p>
+<p>Pour vos projets de télédétection, il faudra que vos <strong>tests</strong> soient les plus <strong>représentatifs</strong> possibles des cas sur lesquels vous voulez appliquer votre classifieur :</p>
+<ul>
+<li>
+<p>Si vous voulez un classifieur capable de généraliser à différentes régions du monde, il faudra tester différentes régions.</p>
+</li>
+<li>
+<p>Si vous voulez un classifieur capable de généraliser à différentes saisons pour une même région, il faudra tester différentes saisons.</p>
+</li>
+<li>
+<p>Si vous pouvez vous contenter d'un classifieur capable de généraliser à une région et une temporalité, vous pouvez tester sur des pixels issus de la même image.</p>
+</li>
+</ul>
+<p>Pour notre exemple, nous allons sélectionner des pixels issus de la même image, mais pour des zones de l'image sur lesquelles le classifieur n'a pas été entrainé.</p>
+<p>Nous utilisons à nouveau <strong>PyRaTe</strong> avec la commande suivante :</p>
+<pre><code class="language-bash">df_test = PyRaTe.labelling(band_list,display_rgb=[3,2,1])
+</code></pre>
+<p>La fenêtre de labélisation s'ouvre, et nous pouvons sélectionner des pixels à ajouter à notre base de données de test pour les mêmes labels ("forest", "field", "water", "city") :</p>
+<p><img alt="Labélisation de la base de test" src="../img/Labelling_test.gif" /></p>
+<p>Après avoir cliqué sur "Finish", nous obtenons le message suivant dans la console Python :</p>
+<p><img alt="Base de données d'entrainement" src="../img/Labelling_test_dataset.png" /></p>
+<p>Il contient le nombre de pixels sélectionnés pour chaque label.</p>
+<p>La variable <code>df_test</code> contient alors notre base de données de test, sous le même format que notre base de données d'entrainement.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nota Bene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Vous pouvez créer plusieurs bases de données de tests sur plusieurs images différentes pour réaliser différents tests.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="performances-en-generalisation">Performances en généralisation</h1>
+<p>Une fois la base de données de <strong>test</strong> constituée, nous pouvons utiliser <strong>PyRaTe</strong> pour le test proprement dit.</p>
+<p>Pour réaliser un test de notre "pipeline" sur notre jeu de données d'entrainement, utilisez la commande :</p>
+<pre><code class="language-bash">PyRaTe.test(classifier_pipeline,df_test)
+</code></pre>
+<p>Apparait alors le message suivant dans la console Python, avec le score d'exactitude du classifieur en test :</p>
+<p><img alt="Exactitude en test" src="../img/Test_accuracy.png" /></p>
+<p><em>Détectez-vous ici un problème de sur-apprentissage ?</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nota Bene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">N'oubliez pas que le score de d'exactitude est inadapté quand on a un fort déséquilibre dans les labels de notre base de données.</td>
+</tr>
+</tbody>
+</table>
+<p>La fenêtre suivante apparait aussi :</p>
+<p><img alt="Matrice de confusion en test" src="../img/Confusion_matrix_test.png" /></p>
+<p>Ce type de tableau se nomme une <strong>matrice de confusion</strong>.</p>
+<p>Il permet de rapidement identifier l'origine des erreurs de prédiction de notre classifieur sur les données de test.</p>
+<p>D'un point de vue général :</p>
+<ul>
+<li>
+<p>La diagonale correspond au nombre de pixels dont le label a été correctement prédit.</p>
+</li>
+<li>
+<p>Hors de la diagonale sont les nombres de pixels pour lesquels les labels n'ont pas été correctement prédit.</p>
+</li>
+</ul>
+<p>Du point de vue d'un label en particulier, il y a 4 types d'erreurs :</p>
+<ul>
+<li>
+<p><strong>TP</strong> : les vrais positifs, ce label a été prédit et c'était le bon label.</p>
+</li>
+<li>
+<p><strong>TN</strong> : le vrais négatifs, ce label n'a pas été prédit et ce n'était pas le bon label.</p>
+</li>
+<li>
+<p><strong>FP</strong> : les faux positifs, ce label a été prédit mais ce n'était pas le bon label.</p>
+</li>
+<li>
+<p><strong>FN</strong> : les faux négatifs, ce label n'a pas été prédit mais c'était le bon label.</p>
+</li>
+</ul>
+<p>Voici une illustration des 2 points de vues : </p>
+<p><img alt="Matrice de confusion" src="../img/Confusion_matrix.png" /></p>
+<p><em>Dans notre cas, d'où viennent principalement les erreurs de prédiction en test ?</em></p>
+<p><em>Quelles performances / erreurs peuvent être attendues en généralisation sur l'image complète ?</em></p>
+<p><em>Avons-nous la garantie que le classifieur performerait bien sur une image d'une autre région ou à une autre saison ?</em></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../entrainement/" class="btn btn-neutral float-left" title="Entrainement"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../prediction/" class="btn btn-neutral float-right" title="Prediction">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../entrainement/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../prediction/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

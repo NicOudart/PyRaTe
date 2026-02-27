@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Nicolas OUDART" /><link rel="canonical" href="https://nicoudart.github.io/PyRaTe/entrainement/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Entrainement - UVSQ_PyRaTe</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Entrainement";
+        var mkdocs_page_input_path = "entrainement.md";
+        var mkdocs_page_url = "/PyRaTe/entrainement/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> UVSQ_PyRaTe
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../importation/">Importation</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Entrainement</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#principe-de-la-classification-supervisee">Principe de la classification supervisée</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#methode-de-la-decision-bayesienne">Méthode de la décision Bayésienne</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generer-une-base-de-donnees-dentrainement">Générer une base de données d'entrainement</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#etude-statistique-des-donnees">Etude statistique des données</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#entrainement">Entrainement</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../test/">Test</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../prediction/">Prediction</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">UVSQ_PyRaTe</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Entrainement</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="entrainement-dun-classifieur">Entrainement d'un classifieur</h1>
+<p><img alt="En-tête entrainement" src="../img/Header_2.png" /></p>
+<p>Maintenant que nous avons importé notre image "raster", nous allons utiliser <strong>PyRaTe</strong> pour entrainer un <strong>classifieur</strong> à prédire les labels associés aux pixels de l'image. </p>
+<hr />
+<h2 id="principe-de-la-classification-supervisee">Principe de la classification supervisée</h2>
+<p>Ce que nous nous apprêtons à faire ici est de la "<strong>classification supervisée</strong>".</p>
+<p>En "apprentissage automatique" (ou "Machine-Learning" en anglais), on essaye d'enseigner à un modèle comment renvoyer les sorties attendues à partir d'une sélection d'entrées.</p>
+<p>Suivant la nature de la sortie, on parlera de :</p>
+<ul>
+<li>
+<p><strong>Régression</strong> si la sortie est quantitative et continue.</p>
+</li>
+<li>
+<p><strong>Classification</strong> si la sortie est quantitative discrète ou qualitative.</p>
+</li>
+</ul>
+<p>Comme ici notre sortie est un "label" (ou "étiquette") que nous voulons attribuer à un pixel à partir des valeurs qu'il contient dans les différentes bandes, nous sommes clairement face à un problème de "<strong>classification</strong>".</p>
+<p>L'expression "<strong>supervisée</strong>" vient du fait que pour enseigner à notre modèle comment prédire les labels corrects pour les pixels de l'image, nous allons lui fournir des exemples de pixels <strong>déjà labélisés</strong> pour qu'il puisse s'<strong>entrainer</strong>.</p>
+<p>Au cours de l'entrainement, le modèle peut donc comparer ses prédictions aux labels attendus pour cet exemple, d'où le côté "supervisé".</p>
+<p>Par opposition, ce que l'on appelle "classification non-supervisée" serait ici le fait de séparer les pixels en différents groupes suivant les valeurs qu'ils contiennent dans les différentes bandes, sans a priori sur l'identification du pixel.
+On parle aussi de "clustering".</p>
+<p><img alt="Apprentissage automatique" src="../img/Machine_learning.png" /></p>
+<h2 id="methode-de-la-decision-bayesienne">Méthode de la décision Bayésienne</h2>
+<p>Une des méthodes de base pour la classification supervisée est la "<strong>décision Bayésienne</strong>" (ou "Naive Bayes" en anglais).</p>
+<p>Le principe est le suivant : essayer d'estimer la probabilité conditionnelle d'un pixel d'avoir un label sachant les valeurs qu'il contient.
+Le label ayant <strong>la plus grande probabilité conditionnelle</strong> est attribué à ce pixel.</p>
+<p>Comme son nom l'indique, cette méthode va déterminer la probabilité conditionnelle de chaque classe en se basant sur la <strong>formule de Bayes</strong>.</p>
+<p>Un <strong>modèle Gaussien</strong> est d'abord ajusté à la distribution des pixels au sein de chaque label dans les données d'entrainement grâce à l'algorithme du "maximum de vraisemblance" (ou "maximum likelihood" en anglais).
+Ce modèle est ensuite utilisé dans la formule de Bayes pour calculer les probabilités conditionnelles de n'importe quel pixel pour chaque classe.</p>
+<p>On peut tracer une <strong>frontière de décision</strong> entre les labels en traçant la ligne des valeurs de pixels pour lesquelles les probabilités conditionnelles entre 2 labels sont égales.</p>
+<p>Voici une illustration de la méthode pour un exemple simple avec un "raster" à 2 bandes, et 2 labels possibles pour les pixels :</p>
+<p><img alt="La décision Bayésienne" src="../img/Naive_Bayes.gif" /></p>
+<p>Pour plus d'informations sur la méthode, cliquez sur ce lien : <a href="https://nicoudart.github.io/UVSQ_LSSI633_data_science/Chap2_Classification_supervisee/#decision-bayesienne">Cours sur la décision Bayésienne</a>.</p>
+<h2 id="generer-une-base-de-donnees-dentrainement">Générer une base de données d'entrainement</h2>
+<p>Comme nous l'avons expliqué précédemment, la classification supervisée nécessite une phase d'<strong>entrainement</strong>, où nous enseignons au modèle comment prédire les bons labels à partir d'une base de données de pixels déjà labélisés.</p>
+<p>Pour la décision Bayésienne, ceci correspond à la phase de détermination du modèle Gaussien de distribution des pixels au sein de chaque label.</p>
+<p>Nous devons donc constituer une base de données de pixels, avec pour chacun un label associé.</p>
+<p>Avec <strong>PyRaTe</strong>, vous devrez utiliser la commande suivante :</p>
+<pre><code class="language-bash">df_training = PyRaTe.labelling(band_list,display_rgb=[3,2,1])
+</code></pre>
+<p>(Le paramètre <code>display_rgb</code> vous permet de choisir les couleurs de l'affichage que vous désirez).</p>
+<p>La fenêtre suivante s'ouvre alors :</p>
+<p><img alt="Fenêtre de labélisation" src="../img/Labelling_window.png" /></p>
+<p>Pour chaque label à ajouter à la base de données d'entrainement :</p>
+<ul>
+<li>
+<p>Entrez le label dans la zone de texte en bas de la fenêtre.</p>
+</li>
+<li>
+<p>Sélectionnez avec le clic gauche de la souris des rectangles sur l'image correspondant à ce label.</p>
+</li>
+</ul>
+<p>Voici par exemple avec notre image Sentinel-2, la sélection des labels "forest", "field", "water" et "city" :</p>
+<p><img alt="Labélisation de la base d'entrainement" src="../img/Labelling_training.gif" /></p>
+<p>L'idée n'est pas de sélectionner tous les pixels de l'image correspondant à un label donné, mais d'être le plus <strong>représentatif</strong> possible de ce label.</p>
+<p>Quand vous avez terminé, cliquez sur "Finish".</p>
+<p>Un message s'affiche dans la console Python :</p>
+<p><img alt="Base de données d'entrainement" src="../img/Labelling_training_dataset.png" /></p>
+<p>Il contient le nombre de pixels sélectionnés pour chaque label.</p>
+<p>La variable <code>df_training</code> contient les données d'entrainement sous la forme d'un <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">DataFrame Pandas</a>.</p>
+<p>Il s'agit d'une sorte de tableau, contenant une colonne pour chaque bande de fréquence, et une colonne pour le label.
+Chaque ligne correspond à un pixel sélectionné.</p>
+<p>Nous utiliserons ce DataFrame pour entrainer notre modèle.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nota Bene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Il est possible de sauvegarder votre base de données d'entrainement sous la forme d'un fichier CSV avec la méthode Pandas <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html">to_csv</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ce CSV pourra être importé plus tard sous la forme d'un DataFrame Pandas avec la méthode <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">read_csv</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vous pouvez également créer des DataFrame Pandas de données d'entrainement pour différentes images, et les fusionner en une seule base par la suite, avec la méthode <a href="https://pandas.pydata.org/docs/reference/api/pandas.concat.html">concat</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ne négligez surtout pas l'étape de la constitution d'une base de données d'entrainement :</strong> un classifieur entrainé sur des données de mauvaise qualité aura des performances mauvaises, <em>Garbage In, Garbage Out</em>.</p>
+<p>Pour qu'un modèle soit performant, il lui faut des données de <strong>qualité</strong> (correctement labélisées, représentatives) et <strong>en quantité</strong> (plusieurs milliers de pixels si possible).</p>
+<p>Dans l'idéal, il faut que les données d'entrainement soient le plus représentatives possibles des cas d'application de vos projets, en provenant potentiellement de plusieurs images différentes.</p>
+<h2 id="etude-statistique-des-donnees">Etude statistique des données</h2>
+<p>Avant d'entrainer un classifieur, il est important de vérifier la <strong>séparabilité</strong> des différents labels suivants les valeurs dans les différentes bandes du "raster".</p>
+<p>Et avant d'entrainer un classifieur de type "décision Bayésienne", il est important de vérifier si l'<strong>hypothèse Gaussienne</strong> des distributions a du sens.</p>
+<p>C'est pourquoi on veut en général afficher des <strong>histogrammes</strong> de la répartition des valeurs des pixels de notre base d'entrainement pour les différents labels et pour les différentes bandes.</p>
+<p>Ceci est possible avec <strong>PyRaTe</strong>, en utilisant la commande :</p>
+<pre><code class="language-bash">PyRaTe.dataset_statistics(df_training)
+</code></pre>
+<p>On obtient alors les 10 histogrammes suivants (un par bande) :</p>
+<p><img alt="Histogrammes des pixels" src="../img/Dataset_training_statistics.png" /></p>
+<p><em>Certaines bandes du "raster" ont-elles l'air plus pertinentes que d'autres pour séparer nos différents labels ?</em></p>
+<p><em>L'hypothèse Gaussienne des distributions a-t-elle l'air raisonnable ?</em></p>
+<p>Dans le cadre de vos projets, il faudra vous poser ces questions.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nota Bene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Si elle n'apporte pas grand chose, une bande peut être retirée du DataFrame avec la méthode Pandas <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html">drop</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Il faut néanmoins avoir en tête qu'une seule bande est rarement suffisante pour séparer 2 labels : il faut souvent utiliser la combinaison de plusieurs bandes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="entrainement">Entrainement</h2>
+<p>Maintenant que nous avons vérifié la qualité de notre base de données d'entrainement, nous allons pouvoir l'utiliser pour <strong>entrainer</strong> notre modèle.</p>
+<p>Voici la commande pour obtenir la "pipeline" de notre modèle à partir des données d'entrainement (l'apprentissage peut prendre un peu de temps) :</p>
+<pre><code class="language-bash">classifier_pipeline = PyRaTe.training(df_training)
+</code></pre>
+<p>On parle ici de "pipeline" car il n'y a en réalité pas que le classifieur.
+Les valeurs de pixels pour les différentes bandes subissent une mise à l'échelle avant passage dans le classifieur.</p>
+<p>Un message apparait dans la console Python :</p>
+<p><img alt="Exactitude en entrainement" src="../img/Training_accuracy.png" /></p>
+<p>Il s'agit de l'<strong>exactitude</strong> ("accuracy" en anglais) de notre modèle sur les données d'entrainement.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Exactitude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">L'exactitude est un critère de performance classique pour un classifieur.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Elle correspond au ratio entre le nombre prédictions correctes et le nombre total de prédictions.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ce critère résume bien les performances d'un classifieur tant que les labels ne sont pas trop déséquilibrés au sein de la base de données.</td>
+</tr>
+</tbody>
+</table>
+<p>Ce critère donne par définition des valeurs entre 0 et 1.
+Plus il est proche de 1, meilleur est le classifieur sur ces données.</p>
+<p><em>L'entrainement s'est-il bien passé ici ?</em></p>
+<p><em>Pensez-vous qu'une exactitude élevée sur les données d'entrainement est suffisante pour juger des performances du classifieur de manière générale ?</em></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../importation/" class="btn btn-neutral float-left" title="Importation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../test/" class="btn btn-neutral float-right" title="Test">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../importation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../test/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
