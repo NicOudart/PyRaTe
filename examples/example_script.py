@@ -35,14 +35,6 @@ PyRaTe.dataset_statistics(df_training)
 
 classifier_pipeline = PyRaTe.training(df_training)
 
-#Predict all pixels in the GeoTIFF:
-
-img_label,labels_code = PyRaTe.prediction(classifier_pipeline,band_list)
-
-#Display the predicted labels:
-
-PyRaTe.label_display(img_label,band_bounds,labels_code)
-
 #Test:-------------------------------------------------------------------------
 
 #Label a test dataset:
@@ -52,3 +44,13 @@ df_test = PyRaTe.labelling(band_list,display_rgb=[3,2,1])
 #Test the classifier:
     
 PyRaTe.test(classifier_pipeline,df_test)
+
+#Prediction:-------------------------------------------------------------------
+
+#Predict all pixels in the GeoTIFF:
+
+img_label,labels_code = PyRaTe.prediction(classifier_pipeline,band_list)
+
+#Display the predicted labels:
+
+PyRaTe.label_display(img_label,band_bounds,labels_code)

@@ -98,10 +98,13 @@ Nous utiliserons ce DataFrame pour entrainer notre modèle.
 |:-|
 |Il est possible de sauvegarder votre base de données d'entrainement sous la forme d'un fichier CSV avec la méthode Pandas [to_csv](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html).|
 |Ce CSV pourra être importé plus tard sous la forme d'un DataFrame Pandas avec la méthode [read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html).|
+|Vous pouvez également créer des DataFrame Pandas de données d'entrainement pour différentes images, et les fusionner en une seule base par la suite, avec la méthode [concat](https://pandas.pydata.org/docs/reference/api/pandas.concat.html).|
 
 **Ne négligez surtout pas l'étape de la constitution d'une base de données d'entrainement :** un classifieur entrainé sur des données de mauvaise qualité aura des performances mauvaises, _Garbage In, Garbage Out_.
 
 Pour qu'un modèle soit performant, il lui faut des données de **qualité** (correctement labélisées, représentatives) et **en quantité** (plusieurs milliers de pixels si possible).
+
+Dans l'idéal, il faut que les données d'entrainement soient le plus représentatives possibles des cas d'application de vos projets, en provenant potentiellement de plusieurs images différentes.
 
 ## Etude statistique des données
 
