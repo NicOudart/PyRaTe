@@ -150,6 +150,8 @@ classifier_pipeline = PyRaTe.training(df_training)
 On parle ici de "pipeline" car il n'y a en réalité pas que le classifieur.
 Les valeurs de pixels pour les différentes bandes subissent une mise à l'échelle avant passage dans le classifieur.
 
+La variable `classifier_pipeline` contiendra la pipeline du classifieur.
+
 Un message apparait dans la console Python :
 
 ![Exactitude en entrainement](img/Training_accuracy.png)
