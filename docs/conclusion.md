@@ -1,5 +1,11 @@
 # A vous de jouer !
 
+![En-tête conclusion](img/Header_6.png)
+
+Pour conclure ce tutoriel, voyons comment **récupérer vous-même** des images satellite rasters à traiter avec **PyRaTe**.
+
+---
+
 Lors de vos projets, vous devrez **choisir** vous même les images satellites dont vous aurez besoin.
 
 Pour faire ce choix, vous devrez vous poser les questions suivantes :

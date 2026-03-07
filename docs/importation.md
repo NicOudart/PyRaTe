@@ -2,7 +2,7 @@
 
 ![En-tête importation](img/Header_1.png)
 
-Pour commencer, nous allons utiliser **PyRaTe** pour importer une image satellite multi-bande à partir de fichiers GeoTIFF, puis réaliser un affichage géoréférencé à partir de ces données.
+Pour commencer, nous allons utiliser **PyRaTe** pour **importer** une image satellite multi-bande à partir de fichiers **GeoTIFF**, puis réaliser un **affichage géoréférencé** à partir de ces données.
 
 ---
 

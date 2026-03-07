@@ -3,7 +3,7 @@
 ![En-tête prédiction](img/Header_4.png)
 
 Maintenant que nous avons validé les performances de notre classifieur en généralisation, nous pouvons l'utiliser avec confiance pour prédire les labels de tous les pixels de notre image "raster".
-**PyRaTe** permet à la fois la prédiction et l'affichage des labels prédits.
+**PyRaTe** permet à la fois la **prédiction** et l'affichage des labels prédits.
 
 ---
 
