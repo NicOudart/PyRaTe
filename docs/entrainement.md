@@ -24,8 +24,11 @@ L'expression "**supervisée**" vient du fait que pour enseigner à notre modèle
 
 Au cours de l'entrainement, le modèle peut donc comparer ses prédictions aux labels attendus pour cet exemple, d'où le côté "supervisé".
 
-Par opposition, ce que l'on appelle "classification non-supervisée" serait ici le fait de séparer les pixels en différents groupes suivant les valeurs qu'ils contiennent dans les différentes bandes, sans a priori sur l'identification du pixel.
-On parle aussi de "clustering".
+La classification supervisée implique que nous ayons une **connaissance du terrain** dont sont issus nos pixels d'exemple.
+
+Par opposition, ce que l'on appelle "classification non-supervisée" serait ici le fait de séparer les pixels en différents groupes suivant les valeurs qu'ils contiennent dans les différentes bandes, sans a priori sur l'identification des pixels.
+On parle aussi de "clustering" ou "**partitionnement**".
+Nous en reparlerons plus loin dans ce tutoriel.
 
 ![Apprentissage automatique](img/Machine_learning.png)
 
