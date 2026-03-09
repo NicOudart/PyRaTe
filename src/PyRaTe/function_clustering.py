@@ -50,7 +50,7 @@ def clustering(band_list,nb_clusters,seed=0):
     sample_idx = []
     for cluster in np.unique(labels):
         cluster_idx = np.where(labels == cluster)[0]
-        nb_samples = min(1000,len(cluster_idx))
+        nb_samples = min(2000,len(cluster_idx))
         cluster_sample = list(np.random.choice(cluster_idx,size=nb_samples,replace=False))
         sample_idx += cluster_sample
         
@@ -87,8 +87,8 @@ def clustering(band_list,nb_clusters,seed=0):
 
     ax.set_yticks([])
     ax.set_xlim([-1, 1])
-    ax.set_xlabel("Coefficient de silhouette",fontsize=12)
-    ax.set_ylabel("Classes",fontsize=12)
+    ax.set_xlabel("Silhouette score",fontsize=12)
+    ax.set_ylabel("Clusters",fontsize=12)
     ax.set_title("Average silhouette score = "+str(round(average_score,3)),fontsize=12)
     
     plt.show()
