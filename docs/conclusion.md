@@ -38,3 +38,6 @@ Par défaut, nous vous recommandons de télécharger :
 ![Copernicus browser](img/Copernicus_browser.gif)
 
 Vous pouvez bien entendu choisir des images satellites de type "raster" provenant de n'importe quel satellite et les utiliser avec **PyRaTe**.
+Faites juste attention à ce que les différentes bandes aient les mêmes nombres de pixels, et les mêmes coordonnées géographiques.
+
+_Choisissez une image satellite sur le moteur de recherche de Copernicus, et essayez de l'importer avec PyRaTe._
