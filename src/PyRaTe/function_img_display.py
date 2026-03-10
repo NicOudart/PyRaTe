@@ -1,7 +1,16 @@
 ###############################################################################
 #HEADER
 
-#This function 
+#This function allows you to display 3 bands of imported GeoTIFF as a 
+#georeferenced RGB image.
+
+#Inputs:
+# - band_list: list of arrays containing the bands of the imported GeoTIFF.
+# - bands_bounds: georeferencing for the image.
+# - display_rgb: list of int containing the indices of bands to display as red,
+#                green and blue.
+
+#Outputs: None
 
 ###############################################################################
 
@@ -18,6 +27,8 @@ def img_display(band_list,band_bounds,display_rgb=[0,1,2]):
     
     lon_min,lon_max = band_bounds.left,band_bounds.right
     lat_min,lat_max = band_bounds.bottom,band_bounds.top
+    
+    #RGB image generation:-----------------------------------------------------
     
     red = band_list[display_rgb[0]]
     green = band_list[display_rgb[1]]
@@ -36,6 +47,8 @@ def img_display(band_list,band_bounds,display_rgb=[0,1,2]):
     blue = np.clip(blue,0,1)
     
     img_rgb = np.stack((red,green,blue),axis=-1)
+    
+    #Display:------------------------------------------------------------------
     
     fig,ax = plt.subplots()
     ax.imshow(img_rgb,extent=[lon_min,lon_max,lat_min,lat_max],origin='upper')

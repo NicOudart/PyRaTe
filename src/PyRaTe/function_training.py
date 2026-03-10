@@ -1,7 +1,14 @@
 ###############################################################################
 #HEADER
 
-#This function 
+#This function allows you to train a Naive Bayes classifier pipeline on a 
+#labelled dataset of pixels.
+
+#Inputs:
+# - df_input: Pandas DataFrame containing the labelled dataset of pixels.
+
+#Outputs:
+# - classifier_pipeline: Scikit-Learn trained classifier pipeline.
 
 ###############################################################################
 

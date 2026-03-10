@@ -1,7 +1,14 @@
 ###############################################################################
 #HEADER
 
-#This function 
+#This function allows you to test the performances of a trained classifier 
+#pipeline on a labelled dataset of pixels.
+
+#Inputs:
+# - classifier_pipeline: Scikit-Learn trained classifier pipeline.
+# - df_input: Pandas DataFrame containing the labelled dataset of pixels.
+
+#Outputs: None
 
 ###############################################################################
 

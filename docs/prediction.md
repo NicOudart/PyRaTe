@@ -27,7 +27,7 @@ Vous pouvez également appliquer cette fonction à de nouvelles images à classi
 
 ## Affichage des labels
 
-Avec **PyRaTe**, pour afficher les **labels** prédits pour une image, avec le géoréférencement, utilisez la commande suivante :
+Avec **PyRaTe**, pour afficher les **labels** prédits pour une image, avec le géoréférencement, utilisez la commande suivante (la prédiction peut prendre un peu de temps) :
 
 ~~~bash
 PyRaTe.label_display(img_label,band_bounds,labels_code)

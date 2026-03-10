@@ -1,7 +1,12 @@
 ###############################################################################
 #HEADER
 
-#This script 
+#This script proposes a complete clustering process of pixels from a satellite 
+#raster image:
+# - GeoTIFF image importation (several bands).
+# - RGB georeferenced display.
+# - Clustering of pixels.
+# - Labelled display.
 
 ###############################################################################
 
@@ -23,11 +28,13 @@ PyRaTe.img_display(band_list,band_bounds,display_rgb=[3,2,1])
 
 #Clustering:-------------------------------------------------------------------
 
+#K-means with number of clusters K = 6 and random seed 1:
+    
 img_label = PyRaTe.clustering(band_list,6,1)
 
 #Labelling:--------------------------------------------------------------------
 
-#Label choice:
+#Labels choice:
 
 labels_code = ['vegetation_1','vegetation_2','urban_1','water','field','urban_2']
 

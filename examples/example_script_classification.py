@@ -1,7 +1,15 @@
 ###############################################################################
 #HEADER
 
-#This script 
+#This script proposes a complete supervised classification process of pixels 
+#from a satellite raster image:
+# - GeoTIFF image importation (several bands).
+# - RGB georeferenced display.
+# - Training dataset preparation.
+# - Statistical study of the training dataset.
+# - Training of a pixel classifier.
+# - Test dataset preparation, and test of the classifier.
+# - Prediction and labelled display.
 
 ###############################################################################
 
@@ -31,7 +39,7 @@ PyRaTe.dataset_statistics(df_training)
 
 #Training:---------------------------------------------------------------------
 
-#Train a classifier on this training dataset:
+#Train a Naive Bayes classifier pipeline on this training dataset:
 
 classifier_pipeline = PyRaTe.training(df_training)
 

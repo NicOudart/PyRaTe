@@ -1,7 +1,16 @@
 ###############################################################################
 #HEADER
 
-#This function 
+#This function allows you to generate a labelled dataset of pixels for training
+#or testing a classifier.
+
+#Inputs:
+# - band_list: list of arrays containing the bands of the imported GeoTIFF.
+# - display_rgb: list of int containing the indices of bands to display for the
+#                GUI, as red, green and blue.
+
+#Outputs:
+# - df_output: Pandas DataFrame containing the labelled dataset of pixels.
 
 ###############################################################################
 

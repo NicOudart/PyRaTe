@@ -1,7 +1,19 @@
 ###############################################################################
 #HEADER
 
-#This function 
+#This function allows you to predict the identification of pixels in an 
+#imported image with a trained classifier pipeline.
+
+#Inputs:
+# - classifier_pipeline: Scikit-Learn trained classifier pipeline.
+# - band_list: list of arrays containing the bands of the imported GeoTIFF.
+
+#Outputs:
+# - img_label: array of int of the same dimensions as the input image, 
+#              corresponding to the clusters assigned to every pixel in the 
+#              image.
+# - label_code: list of str containing the labels corresponding to intergers in
+#               img_label array.
 
 ###############################################################################
 

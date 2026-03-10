@@ -58,7 +58,7 @@ Pour plus d'informations sur la méthode, cliquez sur ce lien : [Cours sur les K
 
 Mettons que nous avons importé les différentes bandes de notre image de Saint-Quentin-en-Yvelines avec **PyRaTe**, et que nous voulons à présent partitionner les pixels de cette image.
 
-Pour séparer les pixels en un nombre de groupes K = 6, utilisez la commande suivante :
+Pour séparer les pixels en un nombre de groupes K = 6, utilisez la commande suivante (le partitionnement peut prendre un peu de temps) :
 
 ~~~bash
 img_label = PyRaTe.clustering(band_list,6,1)
@@ -128,12 +128,15 @@ Un score au-dessus de 0.5 sera considéré comme exceptionnellement bon.
 Sur la figure affichée ici, on voit que le groupe 3 est clairement de bonne qualité, avec peu de pixels mal attribués (scores négatifs) et beaucoup de pixels très bien attribués (scores supérieurs à 0.5).
 A l'inverse, le groupe 2 a l'air d'être le plus mal définit, avec beaucoup de pixels mal attribués.
 
+Le score moyen est de 0.324, ce qui est relativement bon pour notre application.
+
 _Essayez plusieurs valeurs de K entre 2 et 10. Comment jugez-vous la qualité des différentes partitions obtenues ? Laquelle choisiriez-vous ?_
 
 |Nota Bene|
 |:-|
 |Si nous ne calculons le coefficient de silhouette que pour 2000 pixels par groupe, c'est que le calcul de ce score est trop long en pratique pour des millions de pixels.|
 |Les scores obtenus ne sont donc que des **approximations** des coefficients de silhouette réels de notre partition.|
+|Pour la reproductibilité des résultats, la même graine aléatoire que pour l'initialisation des K-moyennes est utilisée pour l'échantillonnage.|
 
 ## Affichage des labels
 

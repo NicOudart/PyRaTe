@@ -1,7 +1,16 @@
 ###############################################################################
 #HEADER
 
-#This function 
+#This function allows you to display the labels assigned to each pixel as a
+#georeferenced image.
+
+#Inputs:
+# - img_label: array of int corresponding to the labels assigned to each pixel.
+# - band_bounds: georeferencing for the image.
+# - label_code: list of str containing the labels corresponding to intergers in
+#               img_label array.
+
+#Outputs: None
 
 ###############################################################################
 

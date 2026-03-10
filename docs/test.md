@@ -99,7 +99,7 @@ La variable `df_test` contient alors notre base de données de test, sous le mê
 
 Une fois la base de données de **test** constituée, nous pouvons utiliser **PyRaTe** pour le test proprement dit.
 
-Pour réaliser un test de notre "pipeline" sur notre jeu de données d'entrainement, utilisez la commande :
+Pour réaliser un test de notre "pipeline" sur notre jeu de données d'entrainement, utilisez la commande (le test peut prendre un peu de temps) :
 
 ~~~bash
 PyRaTe.test(classifier_pipeline,df_test)

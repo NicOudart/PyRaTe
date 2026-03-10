@@ -1,7 +1,14 @@
 ###############################################################################
 #HEADER
 
-#This function 
+#This function allows you to import one or several GeoTIFF files containing 
+#bands of a georeferenced image, in a format adapted to PyRaTe.
+
+#Inputs: None
+
+#Outputs:
+# - band_list: list of arrays containing the bands of the imported GeoTIFF.
+# - bands_bounds: georeferencing for the image.
 
 ###############################################################################
 
@@ -52,20 +59,16 @@ def importation():
             
         geotiff.close()
         
-    #Check the bounds consistency and keep only one:---------------------------
+    #Check the bounds consistency and keep the last one:-----------------------
         
     band_bounds_set = set(band_bounds_list)
     
-    if len(band_bounds_set)==1:
-        
-        band_band_bounds = next(iter(band_bounds_set))
-    
-    else:
+    if len(band_bounds_set)!=1:
         
         raise ValueError('Inconsistency between the different GeoTIFF files !')
         
     #Return the list of raster bands and the bounds:---------------------------
         
-    return band_list,band_band_bounds
+    return band_list,band_bounds
         
         

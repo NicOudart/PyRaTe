@@ -1,7 +1,17 @@
 ###############################################################################
 #HEADER
 
-#This function 
+#This function allows you to cluster pixels in a raster image using K-means.
+
+#Inputs:
+# - band_list: list of arrays containing the bands of the imported GeoTIFF.
+# - nb_clusters: int number of clusters to divide the pixels into (K).
+# - seed: int number of the random seed for the initialization.
+
+#Outputs:
+# - img_label: array of int of the same dimensions as the input image, 
+#              corresponding to the clusters assigned to every pixel in the 
+#              image.
 
 ###############################################################################
 
@@ -46,6 +56,8 @@ def clustering(band_list,nb_clusters,seed=0):
     colorbar.ax.set_yticklabels(np.arange(nb_clusters))
     
     #Silhouette score:---------------------------------------------------------
+    
+    np.random.seed(seed)
     
     sample_idx = []
     for cluster in np.unique(labels):
