@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Nicolas OUDART" /><link rel="canonical" href="https://nicoudart.github.io/PyRaTe/partitionnement/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Partitionnement - UVSQ_PyRaTe</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Partitionnement";
+        var mkdocs_page_input_path = "partitionnement.md";
+        var mkdocs_page_url = "/PyRaTe/partitionnement/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> UVSQ_PyRaTe
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../importation/">Importation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../entrainement/">Entrainement</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../test/">Test</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../prediction/">Prediction</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Partitionnement</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#principe-de-la-classification-non-supervisee">Principe de la classification non-supervisée</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#methode-des-k-moyennes">Méthode des K-moyennes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#partitionnement">Partitionnement</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#choix-du-nombre-de-classes">Choix du nombre de classes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#affichage-des-labels">Affichage des labels</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../conclusion/">A vous de jouer !</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">UVSQ_PyRaTe</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Partitionnement</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="partitionnement-dune-image-raster">Partitionnement d'une image raster</h1>
+<p><img alt="En-tête partitionnement" src="../img/Header_5.png" /></p>
+<p>Dans le cas où nous n'avons aucune idée de l'identification des pixels de notre image satellite, nous pouvons toujours essayer de les grouper par similarité.
+Un tel <strong>partionnement</strong> est également possible avec <strong>PyRaTe</strong>.</p>
+<hr />
+<h2 id="principe-de-la-classification-non-supervisee">Principe de la classification non-supervisée</h2>
+<p>Comme nous l'avions expliqué plus tôt, le principe de la classification non-supervisée, ou "<strong>partitionnement</strong>" ("clustering" en anglais), est de <strong>grouper</strong> les pixels de notre image par <strong>similarité</strong> de leurs valeurs dans les différentes bandes.
+Une fois les groupes formés, nous pourrons essayer de les comprendre pour les <strong>labéliser</strong>.</p>
+<p>Un <strong>bon partitionnement</strong> des pixels a les 2 caractéristiques suivantes :</p>
+<ul>
+<li>
+<p>Les individus au sein d'un groupe sont <strong>les plus similaires possible</strong>.</p>
+</li>
+<li>
+<p>Les différents groupes sont <strong>les plus différents possible</strong>.</p>
+</li>
+</ul>
+<p>Pour mesurer des "similarités" entre pixels ou groupes de pixels, on évalue des <strong>distances</strong> dans l'espace formé par les différentes bandes de l'image.</p>
+<p>En général, <strong>le nombre de groupes</strong> de pixels à former est une <strong>entrée</strong> des méthodes de partitionnement.
+Nous discuterons dans la suite du choix de ce paramètre, qui est loin d'être trivial.</p>
+<h2 id="methode-des-k-moyennes">Méthode des K-moyennes</h2>
+<p>La méthode la plus classique en partitionnement est celle des <strong>K-moyennes</strong> (ou "K-means" en anglais).</p>
+<p>Il s'agit d'une méthode <strong>itérative</strong>, qui pour un nombre de groupes K demandé par l'utilisateur cherche à <strong>minimiser les distances entre individus au sein de chaque groupe</strong>.</p>
+<p>On initialise aléatoirement K points dans l'espace des bandes de l'image, un pour chaque groupe que nous voulons former.</p>
+<p>Jusqu'à ce qu'un critère d'arrêt soit atteint, on itère les opérations suivantes :</p>
+<ul>
+<li>
+<p>On assigne à chaque pixel le groupe du point le plus proche.</p>
+</li>
+<li>
+<p>On calcule la moyenne de chacun des groupes ainsi formés.</p>
+</li>
+<li>
+<p>On déplace chaque point à la position de la moyenne de son groupe.</p>
+</li>
+</ul>
+<p>Les K points vont ainsi converger vers la moyenne des groupes minimisant les distances intra-groupe.</p>
+<p>Voici une illustration de la méthode pour un exemple simple avec un "raster" à 2 bandes, et K = 3 :</p>
+<p><img alt="Les K-moyennes" src="../img/K_means.gif" /></p>
+<p><strong>Attention !</strong> Lorsque l'on partitionne avec les K-moyennes, on fait des <strong>hypothèses implicites</strong> sur les groupes à former.
+Si ces hypothèses ne sont pas respectées, le partitionnement renvoyé par la méthode ne sera pas optimal.</p>
+<p>Voici quelques cas problématiques classiques pour les K-moyennes :</p>
+<p><img alt="Cas problématiques pour les K-moyennes" src="../img/Problems_K_means.png" /></p>
+<p>Pour plus d'informations sur la méthode, cliquez sur ce lien : <a href="https://nicoudart.github.io/UVSQ_LSSI633_data_science/Chap4_Partitionnement/#k-moyennes">Cours sur les K-moyennes</a>.</p>
+<h2 id="partitionnement">Partitionnement</h2>
+<p>Mettons que nous avons importé les différentes bandes de notre image de Saint-Quentin-en-Yvelines avec <strong>PyRaTe</strong>, et que nous voulons à présent partitionner les pixels de cette image.</p>
+<p>Pour séparer les pixels en un nombre de groupes K = 6, utilisez la commande suivante (le partitionnement peut prendre un peu de temps) :</p>
+<pre><code class="language-bash">img_label = PyRaTe.clustering(band_list,6,1)
+</code></pre>
+<p>Le 3ème paramètre est un entier correspondant à la "graine" utilisée pour l'initialisation aléatoire des K points dans la méthode des K-moyennes.</p>
+<p>En effet, cette initialisation étant aléatoire, 2 appels de la méthode sur les mêmes données, avec le même K, ne donneront pas exactement le même résultat.
+Pour s'assurer que les résultats soient reproductibles, on peut "forcer" l'initialisation aléatoire avec ce paramètre.
+Ici on a choisi 1.</p>
+<p>2 figures apparaissent à l'écran.
+La 1ère est le résultat du partitionnement de notre image, avec les différents groupes indiqués par des couleurs différentes : </p>
+<p><img alt="Résultat des K-moyennes" src="../img/Clustering_unlabelled.png" /></p>
+<p>A ce niveau, les groupes ne sont pas labélisés : un numéro leur a été attribué aléatoirement.</p>
+<p>La 2nde figure est un indicateur de qualité de notre partition appelé "coefficient de silhouette".
+Nous en parlerons plus en détails dans la section suivante.</p>
+<p>La variable <code>img_label</code> retournée par la fonction est une matrice Numpy contenant des nombres entiers, correspondant aux différents groupes formés.
+Elle nous servira pour l'affichage géoréférencé de notre résultat une fois celui-ci labélisé.</p>
+<h2 id="choix-du-nombre-de-classes">Choix du nombre de classes</h2>
+<p>Comme nous l'avons mentionné précédemment, le <strong>nombre de groupes</strong> à former K est une <strong>entrée</strong> de la méthode des K-moyennes.</p>
+<p>Il est délicat de choisir un nombre de groupes lorsque l'on a aucun a priori sur l'identification de nos pixels.
+Et c'est une problématique commune à tous les problèmes de partitionnement.</p>
+<p>Instinctivement, on voudrait chercher la valeur de K qui minimise les distances intra-groupe.
+Problème : les distances intra-groupe diminuent toujours à mesure que l'on augmente K.</p>
+<p>Il existe d'autres critères que l'on peut utiliser pour essayer d'optimiser K.
+Le plus connu est le "<strong>coefficient de silhouette</strong>".</p>
+<p>Pour chaque pixel d'une image, on peut déterminer un coefficient de silhouette, indiquant <strong>la qualité de l'attribution du pixel à son groupe</strong>.
+Il est un compromis entre un indicateur de <strong>similarité intra-classe</strong> et un indicateur de <strong>séparabilité inter-classe</strong>.</p>
+<p>Voici une illustration pour une image à 2 bandes, et K = 3 :</p>
+<p><img alt="Le coefficient de silhouette" src="../img/Silhouette_coefficient.png" /></p>
+<p>Ce score varie entre -1 et 1, et on l'interprète de la manière suivante :</p>
+<ul>
+<li>
+<p>Plus le score est proche de 1, et plus l'individu est bien attribué à son groupe.</p>
+</li>
+<li>
+<p>Plus le score est proche de -1, et moins l'individu est bien attribué à son groupe.</p>
+</li>
+<li>
+<p>Un score de 0 indique que l'individu est entre 2 groupes.</p>
+</li>
+</ul>
+<p>On peut calculer un coefficient de silhouette <strong>moyen</strong> pour une partition afin d'en juger la qualité.
+Une bonne approche est de démarrer à K = 2, de tester des valeurs de K croissantes, et de choisir la partition donnant le meilleur score moyen, ou les meilleurs scores pour les différents groupes.</p>
+<p>C'est ce que représente la 2nde figure apparue sur votre écran :</p>
+<p><img alt="Histogramme des coefficients de silhouette" src="../img/Silhouette_coefficents_histograms.png" /></p>
+<p>Pour chaque groupe, on a échantillonné 2000 pixels, et on a calculé leur coefficient de silhouette.
+La distribution de ces coefficients est affichée sous la forme d'histogrammes.
+Le coefficient de silhouette moyen est affiché par un trait en pointillé rouge.</p>
+<p>Pour nos applications, on aura classiquement un score moyen entre 0.2 et 0.4.
+Un score au-dessus de 0.5 sera considéré comme exceptionnellement bon.</p>
+<p>Sur la figure affichée ici, on voit que le groupe 3 est clairement de bonne qualité, avec peu de pixels mal attribués (scores négatifs) et beaucoup de pixels très bien attribués (scores supérieurs à 0.5).
+A l'inverse, le groupe 2 a l'air d'être le plus mal définit, avec beaucoup de pixels mal attribués.</p>
+<p>Le score moyen est de 0.324, ce qui est relativement bon pour notre application.</p>
+<p><em>Essayez plusieurs valeurs de K entre 2 et 10. Comment jugez-vous la qualité des différentes partitions obtenues ? Laquelle choisiriez-vous ?</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nota Bene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Si nous ne calculons le coefficient de silhouette que pour 2000 pixels par groupe, c'est que le calcul de ce score est trop long en pratique pour des millions de pixels.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Les scores obtenus ne sont donc que des <strong>approximations</strong> des coefficients de silhouette réels de notre partition.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pour la reproductibilité des résultats, la même graine aléatoire que pour l'initialisation des K-moyennes est utilisée pour l'échantillonnage.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="affichage-des-labels">Affichage des labels</h2>
+<p>Reprenons notre partition en 6 groupes de l'exemple d'image de Saint-Quentin-en-Yvelines.</p>
+<p>Dans l'idéal, nous voudrions pouvoir attribuer un label à chacune des 6 classes obtenues : en Machine-Learning, on appelle cette étape "<strong>labélisation</strong>".
+La tâche est loin d'être triviale.</p>
+<p>Pour ce faire, on peut se baser sur :</p>
+<ul>
+<li>
+<p>Un analyse visuelle de l'image dans les différentes bandes, avec des affichages RGB.</p>
+</li>
+<li>
+<p>Des histogrammes des valeurs des pixels des différents groupes, pour différentes bandes de l'image.</p>
+</li>
+<li>
+<p>La documentation de l'instrument du satellite d'où provient l'image.</p>
+</li>
+<li>
+<p>Une étude bibliographique sur les observations du site d'étude.</p>
+</li>
+<li>
+<p>Les cartes géographiques du site d'étude.</p>
+</li>
+</ul>
+<p>Une fois des labels décidés pour les différents groupes de pixels, vous pouvez en faire une liste avec une commande du type :</p>
+<pre><code class="language-bash">labels_code = ['vegetation_1','vegetation_2','urban_1','water','field','urban_2']
+</code></pre>
+<p>Et avec cette liste de labels, réaliser un affichage géoréférencé de la même manière que pour la classification supervisée, en utilisant la commande :</p>
+<pre><code class="language-bash">PyRaTe.label_display(img_label,band_bounds,labels_code)
+</code></pre>
+<p>On obtient alors la figure suivante :</p>
+<p><img alt="Labélisation des groupes" src="../img/Clustering_labelled.png" /></p>
+<p><em>Les labels choisis vous paraissent-ils pertinents ? Pouvez-vous en proposer de meilleurs en vous basant sur l'image RGB en vraies et en fausses couleurs?</em></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../prediction/" class="btn btn-neutral float-left" title="Prediction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../conclusion/" class="btn btn-neutral float-right" title="A vous de jouer !">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../prediction/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../conclusion/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
