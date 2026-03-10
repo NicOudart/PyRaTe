@@ -166,6 +166,8 @@ Et avec cette liste de labels, réaliser un affichage géoréférencé de la mê
 PyRaTe.label_display(img_label,band_bounds,labels_code)
 ~~~
 
-On obtient alors :
+On obtient alors la figure suivante :
 
 ![Labélisation des groupes](img/Clustering_labelled.png)
+
+_Les labels choisis vous paraissent-ils pertinents ? Pouvez-vous en proposer de meilleurs en vous basant sur l'image RGB en vraies et en fausses couleurs?_
