@@ -2,7 +2,8 @@
 
 ![En-tête conclusion](img/Header_6.png)
 
-Pour conclure ce tutoriel, voyons comment **récupérer vous-même** des images satellite rasters à traiter avec **PyRaTe**.
+C'est bon, vous savez utiliser **PyRaTe** pour classifier les pixels d'une image satellite raster !
+Pour conclure ce tutoriel, voyons comment **récupérer vous-même** des images satellite à traiter.
 
 ---
 

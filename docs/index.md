@@ -28,6 +28,8 @@ Elle contient des fonctions pour :
 
 * Afficher les **labels prédits** pour les pixels d'une image, avec géoréférencement.
 
+Dans le cas où vous n'avez aucune idée a priori de l'identification des pixels de l'image, elle contient aussi une fonction pour du **partitionnement** des pixels.
+
 Vous trouverez sur ce site web un **tutoriel** pour prendre en main **PyRaTe**, sur un exemple d'image satellite "raster" multi-bande.
 
 ## Installation

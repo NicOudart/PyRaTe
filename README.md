@@ -26,6 +26,8 @@ PyRaTe implements functions for:
 
 * Display the predictions made on a given image, with georeferencing.
 
+* Clustering of pixels in the image if labelling is complicated.
+
 ## Installation
 
 To install the library, get the `path` of PyRaTe on your computer and use the following Python command:
