@@ -118,7 +118,7 @@ C'est ce que représente la 2nde figure apparue sur votre écran :
 
 ![Histogramme des coefficients de silhouette](img/Silhouette_coefficents_histograms.png)
 
-Pour chaque groupe, on échantillonne 2000 pixels, et on calcule leur coefficient de silhouette.
+Pour chaque groupe, on a échantillonné 2000 pixels, et on a calculé leur coefficient de silhouette.
 La distribution de ces coefficients est affichée sous la forme d'histogrammes.
 Le coefficient de silhouette moyen est affiché par un trait en pointillé rouge.
 
