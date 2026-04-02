@@ -14,6 +14,7 @@
 
 #Libraries importation:--------------------------------------------------------
 
+import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix,ConfusionMatrixDisplay
 
 #Function definition:----------------------------------------------------------
@@ -30,3 +31,5 @@ def test(classifier_pipeline,df_input):
     
     cm = confusion_matrix(labels,classifier_pipeline.predict(features),labels=set_labels)
     ConfusionMatrixDisplay(confusion_matrix=cm,display_labels=set_labels).plot()
+    
+    plt.show()
