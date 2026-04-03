@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Nicolas OUDART" /><link rel="canonical" href="https://nicoudart.github.io/PyRaTe/importation/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Importation - UVSQ_PyRaTe</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Importation";
+        var mkdocs_page_input_path = "importation.md";
+        var mkdocs_page_url = "/PyRaTe/importation/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> UVSQ_PyRaTe
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Importation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#raster-et-teledetection">Raster et télédétection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#importation-de-fichiers-geotiff">Importation de fichiers GeoTIFF</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#affichages-rgb">Affichages RGB</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#imagerie-optique-et-radar">Imagerie optique et radar</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../entrainement/">Entrainement</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../test/">Test</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../prediction/">Prediction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../partitionnement/">Partitionnement</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../conclusion/">A vous de jouer !</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">UVSQ_PyRaTe</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Importation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="importation-dune-image-raster">Importation d'une image raster</h1>
+<p><img alt="En-tête importation" src="../img/Header_1.png" /></p>
+<p>Pour commencer, nous allons utiliser <strong>PyRaTe</strong> pour <strong>importer</strong> une image satellite multi-bande à partir de fichiers <strong>GeoTIFF</strong>, puis réaliser un <strong>affichage géoréférencé</strong> à partir de ces données.</p>
+<hr />
+<h2 id="raster-et-teledetection">Raster et télédétection</h2>
+<p>Le "Ra" de <strong>PyRaTe</strong> est pour "<strong>Raster</strong>", et le "Te" est pour "<strong>Télédétection</strong>".</p>
+<p>Si vous êtes maintenant familiers avec la notion de "télédétection", il est probable que vous n'ayez jamais entendu parler de "raster".</p>
+<p>Il existe 2 grands types d'images : les images <strong>matricielles</strong> ou "raster", et les images <strong>vectorielles</strong>.</p>
+<p>Comme leurs noms l'indiquent, l'une est définie par une ou plusieurs matrices 2D, l'autre par des vecteurs.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Raster</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Image constituée d'une (ou plusieurs) matrice 2D.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Chaque élément dans la matrice correspond à un pixel à afficher.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Les valeurs stockées à une position dans les matrices 2D correspondent à l'intensité des pixels dans différentes couleurs.</td>
+</tr>
+</tbody>
+</table>
+<p>Lors de vos projets de télédétection, vous manipulerez exclusivement des images "raster".</p>
+<h2 id="importation-de-fichiers-geotiff">Importation de fichiers GeoTIFF</h2>
+<p>Vous trouverez dans le dossier "examples/dataset_img" de <strong>PyRaTe</strong> un jeu de 10 fichiers GeoTIFF.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">GeoTIFF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Le TIFF est un format d'image "raster" propriétaire, mais assez flexible, couramment utilisé en télédétection.</td>
+</tr>
+<tr>
+<td style="text-align: left;">En effet, il permet d'enregistrer des métadonnées avec l'image, notamment les informations de géoréférencement.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dans ce cas, on appelle le fichier un "GeoTIFF".</td>
+</tr>
+</tbody>
+</table>
+<p>Il s'agit d'une seule image satellite "raster" de Saint-Quentin-en-Yvelines, acquise dans 10 bandes optiques différentes le 19/09/2025 par Sentinel-2.</p>
+<p>Voici à quoi correspondent ces bandes d'acquisition de Sentinel-2 :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Bande</th>
+<th style="text-align: center;">Cible</th>
+<th style="text-align: center;">Longueur d'onde</th>
+<th style="text-align: center;">Résolution au sol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">B01</td>
+<td style="text-align: center;">Aérosols</td>
+<td style="text-align: center;">443 nm</td>
+<td style="text-align: center;">60 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B02</td>
+<td style="text-align: center;">Bleu</td>
+<td style="text-align: center;">490 nm</td>
+<td style="text-align: center;">10 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B03</td>
+<td style="text-align: center;">Vert</td>
+<td style="text-align: center;">560 nm</td>
+<td style="text-align: center;">10 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B04</td>
+<td style="text-align: center;">Rouge</td>
+<td style="text-align: center;">665 nm</td>
+<td style="text-align: center;">10 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B05</td>
+<td style="text-align: center;">Red-edge</td>
+<td style="text-align: center;">705 nm</td>
+<td style="text-align: center;">20 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B06</td>
+<td style="text-align: center;">Red-edge</td>
+<td style="text-align: center;">740 nm</td>
+<td style="text-align: center;">20 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B07</td>
+<td style="text-align: center;">Red-edge</td>
+<td style="text-align: center;">783 nm</td>
+<td style="text-align: center;">20 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B08</td>
+<td style="text-align: center;">Proche infrarouge</td>
+<td style="text-align: center;">842 nm</td>
+<td style="text-align: center;">10 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B08A</td>
+<td style="text-align: center;">Proche infrarouge étroit</td>
+<td style="text-align: center;">865 nm</td>
+<td style="text-align: center;">20 m</td>
+</tr>
+<tr>
+<td style="text-align: center;">B09</td>
+<td style="text-align: center;">Vapeur d'eau</td>
+<td style="text-align: center;">945 nm</td>
+<td style="text-align: center;">60 m</td>
+</tr>
+</tbody>
+</table>
+<p>Pour importer ces différents fichiers GeoTIFF avec <strong>PyRaTe</strong>, utilisez la commande suivante :</p>
+<pre><code class="language-bash">band_list,band_bounds = PyRaTe.importation()
+</code></pre>
+<p>Apparait alors la fenêtre suivante :</p>
+<p><img alt="Importation des GeoTIFF" src="../img/GeoTIFF_importation_window.png" /></p>
+<p>Cherchez les fichiers GeoTIFF dans vos dossiers, sélectionnez-les et cliquez sur "Ouvrir".</p>
+<p>La variable <code>band_list</code> contiendra alors une liste de matrices Numpy, chacune correspondant à une bande.</p>
+<p>La variable <code>band_bounds</code> contient les limites géographiques de l'image.</p>
+<p>Si les limites géographiques des différents "raster" importés ne sont pas les mêmes, un message d'erreur apparaitra.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nota Bene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Ici, chaque bande était enregistrée dans un GeoTIFF différent.</td>
+</tr>
+<tr>
+<td style="text-align: left;">La fonction gère aussi les GeoTIFF contenant plusieurs bandes à la fois.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="affichages-rgb">Affichages RGB</h2>
+<p>Pour vérifier le contenu de nos GeoTIFF, on peut vouloir afficher une image en couleurs (RGB), géoréférencée, à partir des différentes bandes importées.</p>
+<p>Le plus classique est de faire un affichage en "<strong>vraies couleurs</strong>" : la bande du "rouge" (B04) en rouge, la bande du "vert" (B03) en vert, et la bande du "bleu" (B02) en bleu.</p>
+<p>Pour réaliser un tel affichage, utilisez la commande suivante :</p>
+<pre><code class="language-bash">PyRaTe.img_display(band_list,band_bounds,display_rgb=[3,2,1])
+</code></pre>
+<p>Le paramètre <code>display_rgb</code> vous permet de sélectionner dans <code>band_list</code> l'indice des matrices à utiliser pour le rouge, le vert et le bleu.
+On sélectionne ici B04, B03 et B02 avec les indices 3, 2 et 1.</p>
+<p>Voici la figure qui s'affiche :</p>
+<p><img alt="Affichage de l'image RGB en vraies couleurs" src="../img/Img_display_true_colors.png" /></p>
+<p>Bien que les longueurs d'ondes perçues par le satellite dans ces 3 bandes ne correspondent pas exactement aux pics de sensibilité des "cônes" de la rétine humaine, cet affichage donne un ressenti "naturel" des couleurs.</p>
+<p>En imagerie satellite, il est également classique de réaliser un affichage en "<strong>fausses couleurs</strong>" de la manière suivante : la bande du "proche infrarouge" (B08) en rouge, la bande du "rouge" (B04) en vert, et la bande du "vert" (B03) en bleu.</p>
+<p>Pour réaliser un tel affichage, il suffit de reprendre la commande précédente, en modifiant le paramètre <code>display_rgb</code> :</p>
+<pre><code class="language-bash">PyRaTe.img_display(band_list,band_bounds,display_rgb=[7,3,2])
+</code></pre>
+<p>Voici la figure qui s'affiche :</p>
+<p><img alt="Affichage de l'image RGB en fausses couleurs" src="../img/Img_display_false_colors.png" /></p>
+<p>Ce type d'affichage en "fausses couleurs" est particulièrement utile pour l'étude de la végétation : la chloropylle réfléchit fortement le proche infrarouge, ce qui permet de la faire ressortir en rouge dans l'image.
+Les contrastes entre zones urbaines, plans d'eaux et végétation sont également renforcés.</p>
+<p><em>Est-ce bien ce que vous observez ?</em></p>
+<p>Suivant l'application, on peut imaginer réaliser des affichages en "fausses couleurs" avec d'autres bandes d'intérêt.</p>
+<h2 id="imagerie-optique-et-radar">Imagerie optique et radar</h2>
+<p>Les 10 bandes de l'image que vous avez importée correspondent à 10 canaux d'acquisition dans le domaine <strong>optique</strong>.
+Comme nous l'avons vu, chaque canal est centré sur <strong>une longueur d'onde</strong> de la lumière (visible, infrarouge ou ultraviolette).
+Il s'agit d'imagerie "<strong>passive</strong>", puisque c'est la lumière du soleil qui éclaire la surface observée.</p>
+<p><strong>C'est cette image optique que nous utiliserons dans la suite de ce tutoriel</strong>.</p>
+<p>Cependant, <strong>PyRaTe</strong> permet aussi d'importer, d'afficher puis d'analyser des images <strong>radar</strong>.</p>
+<p>Contrairement à l'imagerie optique, l'imagerie radar se fait généralement dans le domaine des <strong>micro-ondes</strong>.
+L'imagerie radar est "<strong>active</strong>", puisque nous éclairons la surface observée avec un signal micro-ondes émit par le satellite.
+L'imagerie optique de la surface ne peut se faire que de jour, et quand la couverture nuageuse est faible, alors que l'imagerie radar peut se faire <strong>de jour comme de nuit</strong>, et est capable de "<strong>percer les nuages</strong>".</p>
+<p><img alt="Principe de l'imagerie optique et radar" src="../img/Optical_radar_imaging.png" /></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nota Bene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Pour faire une analogie avec les 5 sens, on compare souvent l'imagerie optique à <strong>la vue</strong>, et l'imagerie radar au <strong>toucher</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">En effet, l'imagerie optique nous donnera plutôt une information sur la "couleur" de la surface observée, alors que l'imagerie radar donnera une information sur sa "rugosité".</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ceci est lié au fait que le radar est un instrument actif, qui fonctionne à des longueurs d'ondes centimétriques, plus proches de la dimension des structures que l'on veut observer à la surface.</td>
+</tr>
+</tbody>
+</table>
+<p>Vous trouverez dans le dossier "examples/dataset_radar" de <strong>PyRaTe</strong> un jeu de 2 fichiers GeoTIFF correspondant à une image radar "raster" de Saint-Quentin-en-Yvelines, acquise par Sentinel-1.</p>
+<p>Le radar de Sentinel-1 est un SAR ou "<strong>radar à synthèse d'ouverture</strong>".
+Il s'agit d'une méthode de traitement de données pour obtenir des images radars ayant une grande résolution au sol, tout en gardant une taille d'antenne acceptable pour le satellite.</p>
+<p>Ce radar fonctionne dans la <strong>bande de fréquences C</strong> (5.4 GHz, soit environ 6 cm de longueur d'onde), sa résolution au sol peut descendre jusqu'à 5 m, et il est capable d'émettre et recevoir dans <strong>2 polarisations</strong> : horizontale (H) et verticale (V).</p>
+<p>On parlera de "<strong>co-polar</strong>" quand on émet et reçoit dans la même polarisation (HH ou VV), et de "<strong>cross-polar</strong>" lorsque l'on émet et reçoit dans des polarisations différentes (HV ou VH).
+La combinaison des informations de co-polar et cross-polar est particulièrement intéressante pour <strong>discriminer certains types de surface</strong>.</p>
+<p><img alt="Principe d'un radar polarimétrique" src="../img/Polarimetric_radar.png" /></p>
+<p>Les 2 GeoTIFF à votre disposition correspondent à la bande co-polar VV, et la bande cross-polar VH.</p>
+<p>Comme pour l'image optique, vous pouvez charger ces 2 bandes de l'image radar avec la fonction <code>importation</code> de <strong>PyRaTe</strong>.</p>
+<p><img alt="Importation des GeoTIFF radar" src="../img/GeoTIFF_importation_window_2.png" /></p>
+<p>Une fois l'image radar importée, il est classique de faire un affichage RGB "fausses couleurs" avec la cross-polar pour le rouge, la co-polar pour le vert, et le ratio co-polar / cross-polar pour le bleu.
+Ceci est rendu possible dans <strong>PyRaTe</strong> avec la commande suivante :</p>
+<pre><code>PyRaTe.radar_display(band_list,band_bounds,co_polar=0,cross_polar=1)
+</code></pre>
+<p>Le paramètre <code>co_polar</code> vous permet de sélectionner dans <code>band_list</code> l'indice de la matrice à utiliser comme co-polar, et <code>cross-polar</code> l'indice de la matrice à utiliser comme cross-polar.
+On considère ici que le 1er GeoTIFF importé est le VV, et le second le VH.</p>
+<p>Voici la figure qui s'affiche :</p>
+<p><img alt="Affichage de l'image radar en fausses couleurs" src="../img/Radar_display_false_colors.png" /></p>
+<p>On interprète ce type d'affichage RGB de la manière suivante :</p>
+<ul>
+<li>
+<p>Le <strong>rouge</strong> correspond à des surface "dépolarisant" beaucoup le signal radar. Il s'agit donc probablement de zones <strong>fortement rugueuses</strong>, provocant de la diffusion de volume.</p>
+</li>
+<li>
+<p>Le <strong>vert</strong> correspond à des surfaces "dépolarisant" peu le signal radar. Il s'agit donc de surfaces <strong>plutôt lisses</strong>, provocant une réflexion quasi-directe, avec un peu de diffusion de surface.</p>
+</li>
+<li>
+<p>Le <strong>bleu</strong> permet de faire ressortir des surface <strong>lisses</strong>, ou des "<strong>doubles rebonds</strong>".</p>
+</li>
+<li>
+<p>Le <strong>jaune</strong> correspond à des <strong>surfaces complexes</strong>, renvoyant autant de signal "dépolarisé" que "polarisé".</p>
+</li>
+<li>
+<p>Une surface <strong>sombre</strong> sera <strong>extrêmement lisse</strong> : on a une réflexion quasi-spéculaire.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Nota Bene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">On parle ici de "rugueux" ou "lisse" du point de vue du radar, c'est-à-dire <strong>de sa longueur d'onde</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Suivant la longueur d'onde du radar utilisé, une même surface paraitra donc plus ou moins rugueuse.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>L'angle de vue</strong> du radar aura aussi un influence sur les couleurs affichées.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Bref, les données radar ne sont <strong>pas toujours simples à interpréter</strong> pour un non-expert.</td>
+</tr>
+</tbody>
+</table>
+<p><em>A partir de ces informations, comment interprétez-vous la rugosité des surfaces à Saint-Quentin-en-Yvelines ?</em></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../entrainement/" class="btn btn-neutral float-right" title="Entrainement">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../entrainement/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
