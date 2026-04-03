@@ -128,6 +128,8 @@ Contrairement à l'imagerie optique, l'imagerie radar se fait généralement dan
 L'imagerie radar est "**active**", puisque nous éclairons la surface observée avec un signal micro-ondes émit par le satellite.
 L'imagerie optique de la surface ne peut se faire que de jour, et quand la couverture nuageuse est faible, alors que l'imagerie radar peut se faire **de jour comme de nuit**, et est capable de "**percer les nuages**".
 
+![Affichage de l'image radar en fausses couleurs](img/Radar_display_false_colors.png)
+
 |Nota Bene|
 |:-|
 |Pour faire une analogie avec les 5 sens, on compare souvent l'imagerie optique à **la vue**, et l'imagerie radar au **toucher**.|
@@ -137,16 +139,20 @@ L'imagerie optique de la surface ne peut se faire que de jour, et quand la couve
 Vous trouverez dans le dossier "examples/dataset_radar" de **PyRaTe** un jeu de 2 fichiers GeoTIFF correspondant à une image radar "raster" de Saint-Quentin-en-Yvelines, acquise par Sentinel-1.
 
 Le radar de Sentinel-1 est un SAR ou "**radar à synthèse d'ouverture**".
-Il s'agit d'une méthode de traitement de données pour obtenir des images radars ayant une grande résolution au sol, tout en gardant une taille d'antenne acceptable pour un satellite.
+Il s'agit d'une méthode de traitement de données pour obtenir des images radars ayant une grande résolution au sol, tout en gardant une taille d'antenne acceptable pour le satellite.
 
-Ce radar fonctionne dans la **bande de fréquences C** (5.4 GHz, soit environ 6 cm de longueur d'onde), a une résolution au sol pouvant descendre jusqu'à 5 m, et est capable d'émettre et recevoir dans **2 polarisations** : horizontale (H) et verticale (V).
+Ce radar fonctionne dans la **bande de fréquences C** (5.4 GHz, soit environ 6 cm de longueur d'onde), sa résolution au sol peut descendre jusqu'à 5 m, et il est capable d'émettre et recevoir dans **2 polarisations** : horizontale (H) et verticale (V).
 
 On parlera de "**co-polar**" quand on émet et reçoit dans la même polarisation (HH ou VV), et de "**cross-polar**" lorsque l'on émet et reçoit dans des polarisations différentes (HV ou VH).
 La combinaison des informations de co-polar et cross-polar est particulièrement intéressante pour **discriminer certains types de surface**.
 
+![Principe d'un radar polarimétrique](img/Polarimetric_radar.png)
+
 Les 2 GeoTIFF à votre disposition correspondent à la bande co-polar VV, et la bande cross-polar VH.
 
 Comme pour l'image optique, vous pouvez charger ces 2 bandes de l'image radar avec la fonction `importation` de **PyRaTe**.
+
+![Importation des GeoTIFF radar](img/GeoTIFF_importation_window_2.png)
 
 Une fois l'image radar importée, il est classique de faire un affichage RGB "fausses couleurs" avec la cross-polar pour le rouge, la co-polar pour le vert, et le ratio co-polar / cross-polar pour le bleu.
 Ceci est rendu possible dans **PyRaTe** avec la commande suivante :
@@ -178,5 +184,6 @@ On interprète ce type d'affichage RGB de la manière suivante :
 |:-|
 |On parle ici de "rugueux" ou "lisse" du point de vue du radar, c'est-à-dire **de sa longueur d'onde**.|
 |Suivant la longueur d'onde du radar utilisé, une même surface paraitra donc plus ou moins rugueuse.|
+|**L'angle de vue** du radar aura aussi un influence sur les couleurs affichées.|
 
 _A partir de ces informations, comment interprétez-vous la rugosité des surfaces à Saint-Quentin-en-Yvelines ?_
