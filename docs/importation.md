@@ -185,5 +185,6 @@ On interprète ce type d'affichage RGB de la manière suivante :
 |On parle ici de "rugueux" ou "lisse" du point de vue du radar, c'est-à-dire **de sa longueur d'onde**.|
 |Suivant la longueur d'onde du radar utilisé, une même surface paraitra donc plus ou moins rugueuse.|
 |**L'angle de vue** du radar aura aussi un influence sur les couleurs affichées.|
+|Bref, les données radar ne sont **pas toujours simples à interperter** pour un non-expert.|
 
 _A partir de ces informations, comment interprétez-vous la rugosité des surfaces à Saint-Quentin-en-Yvelines ?_
