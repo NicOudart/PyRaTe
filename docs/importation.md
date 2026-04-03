@@ -128,7 +128,7 @@ Contrairement à l'imagerie optique, l'imagerie radar se fait généralement dan
 L'imagerie radar est "**active**", puisque nous éclairons la surface observée avec un signal micro-ondes émit par le satellite.
 L'imagerie optique de la surface ne peut se faire que de jour, et quand la couverture nuageuse est faible, alors que l'imagerie radar peut se faire **de jour comme de nuit**, et est capable de "**percer les nuages**".
 
-![Affichage de l'image radar en fausses couleurs](img/Radar_display_false_colors.png)
+![Principe de l'imagerie optique et radar](img/Optical_radar_imaging.png)
 
 |Nota Bene|
 |:-|
