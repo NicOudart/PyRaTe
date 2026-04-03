@@ -26,7 +26,7 @@ Lors de vos projets de télédétection, vous manipulerez exclusivement des imag
 
 ## Importation de fichiers GeoTIFF
 
-Vous trouverez dans le dossier "examples/dataset" de **PyRaTe** un jeu de 10 fichiers GeoTIFF.
+Vous trouverez dans le dossier "examples/dataset_img" de **PyRaTe** un jeu de 10 fichiers GeoTIFF.
 
 |GeoTIFF|
 |:-|
@@ -34,7 +34,7 @@ Vous trouverez dans le dossier "examples/dataset" de **PyRaTe** un jeu de 10 fic
 |En effet, il permet d'enregistrer des métadonnées avec l'image, notamment les informations de géoréférencement.|
 |Dans ce cas, on appelle le fichier un "GeoTIFF".|
 
-Il s'agit d'une seule image satellite "raster" de Saint-Quentin-en-Yvelines, acquise dans 10 bandes différentes le 19/09/2025 par Sentinel-2.
+Il s'agit d'une seule image satellite "raster" de Saint-Quentin-en-Yvelines, acquise dans 10 bandes optiques différentes le 19/09/2025 par Sentinel-2.
 
 Voici à quoi correspondent ces bandes d'acquisition de Sentinel-2 :
 
@@ -113,3 +113,70 @@ Les contrastes entre zones urbaines, plans d'eaux et végétation sont égalemen
 _Est-ce bien ce que vous observez ?_
 
 Suivant l'application, on peut imaginer réaliser des affichages en "fausses couleurs" avec d'autres bandes d'intérêt.
+
+## Imagerie optique et radar
+
+Les 10 bandes de l'image que vous avez importée correspondent à 10 canaux d'acquisition dans le domaine **optique**.
+Comme nous l'avons vu, chaque canal est centré sur **une longueur d'onde** de la lumière (visible, infrarouge ou ultraviolette).
+Il s'agit d'imagerie "**passive**", puisque c'est la lumière du soleil qui éclaire la surface observée.
+
+**C'est cette image optique que nous utiliserons dans la suite de ce tutoriel**.
+
+Cependant, **PyRaTe** permet aussi d'importer, d'afficher puis d'analyser des images **radar**.
+
+Contrairement à l'imagerie optique, l'imagerie radar se fait généralement dans le domaine des **micro-ondes**.
+L'imagerie radar est "**active**", puisque nous éclairons la surface observée avec un signal micro-ondes émit par le satellite.
+L'imagerie optique de la surface ne peut se faire que de jour, et quand la couverture nuageuse est faible, alors que l'imagerie radar peut se faire **de jour comme de nuit**, et est capable de "**percer les nuages**".
+
+|Nota Bene|
+|:-|
+|Pour faire une analogie avec les 5 sens, on compare souvent l'imagerie optique à **la vue**, et l'imagerie radar au **toucher**.|
+|En effet, l'imagerie optique nous donnera plutôt une information sur la "couleur" de la surface observée, alors que l'imagerie radar donnera une information sur sa "rugosité".|
+|Ceci est lié au fait que le radar est un instrument actif, qui fonctionne à des longueurs d'ondes centimétriques, plus proches de la dimension des structures que l'on veut observer à la surface.|
+
+Vous trouverez dans le dossier "examples/dataset_radar" de **PyRaTe** un jeu de 2 fichiers GeoTIFF correspondant à une image radar "raster" de Saint-Quentin-en-Yvelines, acquise par Sentinel-1.
+
+Le radar de Sentinel-1 est un SAR ou "**radar à synthèse d'ouverture**".
+Il s'agit d'une méthode de traitement de données pour obtenir des images radars ayant une grande résolution au sol, tout en gardant une taille d'antenne acceptable pour un satellite.
+
+Ce radar fonctionne dans la **bande de fréquences C** (5.4 GHz, soit environ 6 cm de longueur d'onde), a une résolution au sol pouvant descendre jusqu'à 5 m, et est capable d'émettre et recevoir dans **2 polarisations** : horizontale (H) et verticale (V).
+
+On parlera de "**co-polar**" quand on émet et reçoit dans la même polarisation (HH ou VV), et de "**cross-polar**" lorsque l'on émet et reçoit dans des polarisations différentes (HV ou VH).
+La combinaison des informations de co-polar et cross-polar est particulièrement intéressante pour **discriminer certains types de surface**.
+
+Les 2 GeoTIFF à votre disposition correspondent à la bande co-polar VV, et la bande cross-polar VH.
+
+Comme pour l'image optique, vous pouvez charger ces 2 bandes de l'image radar avec la fonction `importation` de **PyRaTe**.
+
+Une fois l'image radar importée, il est classique de faire un affichage RGB "fausses couleurs" avec la cross-polar pour le rouge, la co-polar pour le vert, et le ratio co-polar / cross-polar pour le bleu.
+Ceci est rendu possible dans **PyRaTe** avec la commande suivante :
+
+~~~
+PyRaTe.radar_display(band_list,band_bounds,co_polar=0,cross_polar=1)
+~~~
+
+Le paramètre `co_polar` vous permet de sélectionner dans `band_list` l'indice de la matrice à utiliser comme co-polar, et `cross-polar` l'indice de la matrice à utiliser comme cross-polar.
+On considère ici que le 1er GeoTIFF importé est le VV, et le second le VH.
+
+Voici la figure qui s'affiche :
+
+![Affichage de l'image radar en fausses couleurs](img/Radar_display_false_colors.png)
+
+On interprète ce type d'affichage RGB de la manière suivante :
+
+* Le **rouge** correspond à des surface "dépolarisant" beaucoup le signal radar. Il s'agit donc probablement de zones **fortement rugueuses**, provocant de la diffusion de volume.
+
+* Le **vert** correspond à des surfaces "dépolarisant" peu le signal radar. Il s'agit donc de surfaces **plutôt lisses**, provocant une réflexion quasi-directe, avec un peu de diffusion de surface.
+
+* Le **bleu** permet de faire ressortir des surface **lisses**, ou des "**doubles rebonds**".
+
+* Le **jaune** correspond à des **surfaces complexes**, renvoyant autant de signal "dépolarisé" que "polarisé".
+
+* Une surface **sombre** sera **extrêmement lisse** : on a une réflexion quasi-spéculaire.
+
+|Nota Bene|
+|:-|
+|On parle ici de "rugueux" ou "lisse" du point de vue du radar, c'est-à-dire **de sa longueur d'onde**.|
+|Suivant la longueur d'onde du radar utilisé, une même surface paraitra donc plus ou moins rugueuse.|
+
+_A partir de ces informations, comment interprétez-vous la rugosité des surfaces à Saint-Quentin-en-Yvelines ?_

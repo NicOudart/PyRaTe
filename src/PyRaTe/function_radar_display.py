@@ -1,11 +1,13 @@
 ###############################################################################
 #HEADER
 
-#This function allows you to display 3 bands of imported GeoTIFF as a 
-#georeferenced RGB image.
+#This function allows you to display radar co-polar (HH or VV) and cross-polar 
+#(HV or VH) bands of imported GeoTIFF as a georeferenced RGB image, with 
+#cross-polar as red, co-polar as green, and the co-polar/cross-polar ratio as 
+#blue.
 
 #Inputs:
-# - band_list: list of arrays containing the bands of the imported GeoTIFF.
+# - band_list: list of arrays containing the co and cross-polar bands of the imported GeoTIFF.
 # - bands_bounds: georeferencing for the image.
 # - co_polar: int corresponding to the co-polar band index in the list.
 # - cross_polar : int corresponding to the cross-polar band index in the list.
