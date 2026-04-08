@@ -87,7 +87,7 @@ def labelling(band_list,display_rgb=[0,1,2]):
     
     fig,ax = plt.subplots()
     plt.subplots_adjust(bottom=0.2)
-    ax.imshow(img_rgb,origin='upper')
+    ax.imshow(img_rgb,origin='upper',interpolation='nearest')
     ax.set_title('Enter a label and select a rectangle on the image')
     
     #Define the Matplotlib widgets:--------------------------------------------
@@ -98,14 +98,14 @@ def labelling(band_list,display_rgb=[0,1,2]):
     ax_button = plt.axes([0.8, 0.01, 0.15, 0.05])
     ax.button = Button(ax_button,'Finish')
     
-    ax.selector = RectangleSelector(ax,onselect,useblit=True,button=[1],interactive=True)
+    ax.selector = RectangleSelector(ax,onselect,useblit=False,button=[1],interactive=True)
     ax.text_box.on_submit(submit)
     ax.button.on_clicked(finish)
     
     #Loop until the dataset is finished:---------------------------------------
     
     while not finished:
-        plt.pause(0.01)
+        plt.pause(0.05)
         
     plt.close(fig)
     
