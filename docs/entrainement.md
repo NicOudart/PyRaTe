@@ -66,6 +66,8 @@ Avec **PyRaTe**, vous devrez utiliser la commande suivante :
 df_training = PyRaTe.labelling(band_list,display_rgb=[3,2,1])
 ~~~
 
+**Attention, cette commande ferme toutes les fenêtres matplotlib ouvertes !**
+
 (Le paramètre `display_rgb` vous permet de choisir les couleurs de l'affichage que vous désirez).
 
 La fenêtre suivante s'ouvre alors :

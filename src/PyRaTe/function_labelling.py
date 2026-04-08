@@ -25,6 +25,8 @@ from matplotlib.widgets import TextBox,RectangleSelector,Button
 
 def labelling(band_list,display_rgb=[0,1,2]):
     
+    plt.close('all') #Close all other matplotlib windows
+    
     #Variables initialization:-------------------------------------------------
     
     label = ''
